@@ -43,8 +43,10 @@ async def main():
     # 4. Initialize and start Telegram Bot Engine
     await application.initialize()
     await application.start()
-    await application.updater.start_polling(allowed_updates=Application.DEFAULT_TYPE)
-    logger.info("Telegram engine pooling activated.")
+    
+    # FIX: Removed the non-existent Application.DEFAULT_TYPE attribute assignment
+    await application.updater.start_polling()
+    logger.info("Telegram engine polling activated.")
 
     # 5. Start lightweight aiohttp server concurrently to satisfy Render HTTP health checks
     app = web.Application()
